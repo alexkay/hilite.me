@@ -1,1 +1,23 @@
-Coming soon...
+<table>
+    <tr>
+        <td>
+            <textarea name="source" rows="10" cols="40">print &quot;hello world!&quot;</textarea>
+        </td>
+        <td>
+            Settings<br/>
+            <select>
+            {% for lexer in lexers %}
+            <option {% ifequal lexer.0 "python" %}selected="selected" {% endifequal %}value="{{ lexer.0|escape }}">{{ lexer.1|escape }}</option>
+            {% endfor %}
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <textarea name="result" rows="10" cols="40"/></textarea>
+        </td>
+        <td>
+            Preview
+        </td>
+    </tr>
+</table>
