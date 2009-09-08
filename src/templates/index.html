@@ -1,23 +1,27 @@
+<form action="/" method="post">
 <table>
     <tr>
         <td>
-            <textarea name="source" rows="10" cols="40">print &quot;hello world!&quot;</textarea>
+            <textarea name="code" rows="10" cols="40">{{ code|escape }}</textarea>
         </td>
         <td>
             Settings<br/>
-            <select>
-            {% for lexer in lexers %}
-            <option {% ifequal lexer.0 "python" %}selected="selected" {% endifequal %}value="{{ lexer.0|escape }}">{{ lexer.1|escape }}</option>
+            <select name="lexer">
+            {% for item in lexers %}
+            <option {% ifequal item.0 lexer %}selected="selected" {% endifequal %}value="{{ item.0|escape }}">{{ item.1|escape }}</option>
             {% endfor %}
             </select>
+            <br/>
+            <input type="submit" value="Highlight!"/>
         </td>
     </tr>
     <tr>
         <td>
-            <textarea name="result" rows="10" cols="40"/></textarea>
+            <textarea name="html" rows="10" cols="40"/>{{ html|escape }}</textarea>
         </td>
         <td>
-            Preview
+            {{ html }}
         </td>
     </tr>
 </table>
+</form>
