@@ -21,7 +21,7 @@ class IndexHandler(webapp.RequestHandler):
 
         formatter = HtmlFormatter(noclasses=True,
                                   cssclass='',
-                                  cssstyles="overflow:auto;width:auto;border:solid#959596;white-space:pre;border-width:.1em .1em .1em .8em;padding:.2em .6em;")
+                                  cssstyles="overflow:auto;width:auto;border:solid#959596;border-width:.1em .1em .1em .8em;padding:.2em .6em;")
         html = highlight(code, get_lexer_by_name(lexer), formatter)
         self.response.out.write(template.render(path, locals()))
 
