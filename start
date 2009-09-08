@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+/opt/google-appengine/dev_appserver.py src
