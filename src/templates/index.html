@@ -1,3 +1,4 @@
+<body>
 <form action="/" method="post">
 <table>
     <tr>
@@ -5,10 +6,15 @@
             <textarea name="code" rows="10" cols="40">{{ code|escape }}</textarea>
         </td>
         <td>
-            Settings<br/>
-            <select name="lexer">
+            Language: <select name="lexer">
             {% for item in lexers %}
             <option {% ifequal item.0 lexer %}selected="selected" {% endifequal %}value="{{ item.0|escape }}">{{ item.1|escape }}</option>
+            {% endfor %}
+            </select>
+            <br/>
+            Colour scheme: <select name="style">
+            {% for item in styles %}
+            <option {% ifequal item style %}selected="selected" {% endifequal %}value="{{ item|escape }}">{{ item|escape }}</option>
             {% endfor %}
             </select>
             <br/>
@@ -25,3 +31,4 @@
     </tr>
 </table>
 </form>
+</body>
