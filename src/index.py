@@ -33,7 +33,7 @@ class IndexHandler(webapp.RequestHandler):
                    self.request.method == 'GET' and
                    unquote(self.request.cookies.get('linenos', ''))) or ''
         divstyles = self.request.get('divstyles',
-                                     unquote(self.request.cookies.get('divstyles')))
+                                     unquote(self.request.cookies.get('divstyles', '')))
         if not divstyles:
             divstyles = 'color:black;background:white;border:solid grey;'
             divstyles += 'border-width:.1em .1em .1em .8em;padding:.2em .6em;'
