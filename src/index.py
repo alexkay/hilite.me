@@ -25,10 +25,12 @@ class IndexHandler(webapp.RequestHandler):
         styles = sorted(get_all_styles(), key=str.lower)
         divstyles = self.request.get("divstyles")
         if not divstyles:
-            divstyles = "border:solid#808080;border-width:.1em .1em .1em .8em;"
-            divstyles += "padding:.2em .6em;"
+            divstyles = "color:black;background:white;border:solid grey;"
+            divstyles += "border-width:.1em .1em .1em .8em;padding:.2em .6em;"
         defstyles = "overflow:auto;width:auto;"
+        linenos = self.request.get("linenos")
         formatter = HtmlFormatter(style=style,
+                                  linenos='inline' if linenos else False,
                                   noclasses=True,
                                   cssclass='',
                                   cssstyles=defstyles + divstyles,

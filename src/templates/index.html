@@ -18,6 +18,7 @@
             {% endfor %}
             </select>
             <br/>
+            <input name="linenos" id="linenos" type="checkbox" value="1" {% if linenos %}checked{% endif %} /><label for="linenos">Line numbers</label><br/>
             Style: <input type="text" name="divstyles" value="{{ divstyles|escape }}"/><br/>
             <input type="submit" value="Highlight!"/>
         </td>
