@@ -1,6 +1,4 @@
-* inline css
-* border type
-* border colour
-* background colour
 * tabsize
 * basic layout (fixed width, test if output overflows)
+* line numbers
+* save settings to cookies

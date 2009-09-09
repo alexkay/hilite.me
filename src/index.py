@@ -23,16 +23,15 @@ class IndexHandler(webapp.RequestHandler):
         if not style:
             style = "colorful"
         styles = sorted(get_all_styles(), key=str.lower)
-
+        divstyles = self.request.get("divstyles")
+        if not divstyles:
+            divstyles = "border:solid#808080;border-width:.1em .1em .1em .8em;"
+            divstyles += "padding:.2em .6em;"
+        defstyles = "overflow:auto;width:auto;"
         formatter = HtmlFormatter(style=style,
                                   noclasses=True,
                                   cssclass='',
-                                  cssstyles=
-                                  "overflow:auto;"
-                                  "width:auto;"
-                                  "border:solid#959596;"
-                                  "border-width:.1em .1em .1em .8em;"
-                                  "padding:.2em .6em;",
+                                  cssstyles=defstyles + divstyles,
                                   prestyles="margin: 0")
         html = highlight(code, get_lexer_by_name(lexer), formatter)
         self.response.out.write(template.render(path, locals()))
