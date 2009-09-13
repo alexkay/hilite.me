@@ -15,6 +15,9 @@
         background:#fff;
         font-family:Verdana,Helvetica,Arial,sans-serif;
       }
+      input {
+          margin:.5em 0;
+      }
       #container {
           width:750px;
           margin:1em auto;
@@ -49,6 +52,9 @@
       #divstyles {
           width:50%;
       }
+      #preview {
+          padding-bottom: 3em;
+      }
       #footer {
           border-top:1px dotted #000;
       }
@@ -73,13 +79,13 @@
           <div id="code">
             <div id="code2">
               <strong>Source code:</strong><br/>
-              <textarea name="code">{{ code|escape }}</textarea>
+              <textarea name="code" rows="10" cols="40">{{ code|escape }}</textarea>
             </div>
           </div>
           <div id="html">
             <div id="html2">
               <strong>HTML:</strong><br/>
-              <textarea name="html" readonly="readonly">{{ html|escape }}</textarea>
+              <textarea name="html" rows="10" cols="40" readonly="readonly">{{ html|escape }}</textarea>
             </div>
           </div>
         </div>
@@ -106,9 +112,9 @@
         </div>
         <div id="preview">
           <p>
-            <strong>Preview:</strong><br/>
-            {{ html }}
+            <strong>Preview:</strong>
           </p>
+          {{ html }}
         </div>
         <div id="footer">
           <p>

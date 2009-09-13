@@ -35,7 +35,7 @@ class IndexHandler(webapp.RequestHandler):
         divstyles = self.request.get('divstyles',
                                      unquote(self.request.cookies.get('divstyles', '')))
         if not divstyles:
-            divstyles = 'color:black;background:white;border:solid grey;'
+            divstyles = 'color:black;background:white;border:solid gray;'
             divstyles += 'border-width:.1em .1em .1em .8em;padding:.2em .6em;'
         defstyles = 'overflow:auto;width:auto;'
         formatter = HtmlFormatter(style=style,
