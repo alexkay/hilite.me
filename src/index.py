@@ -45,6 +45,7 @@ class IndexHandler(webapp.RequestHandler):
                                   cssstyles=defstyles + divstyles,
                                   prestyles='margin: 0')
         html = highlight(code, get_lexer_by_name(lexer), formatter)
+        html = "<!-- HTML generated using hilite.me -->\n" + html
         next_year = formatdate(time.time() + 60*60*24*365)
         self.response.headers.add_header('Set-Cookie',
                                          'lexer=%s; expires=%s' %
@@ -60,5 +61,4 @@ class IndexHandler(webapp.RequestHandler):
                                          (quote(divstyles), next_year))
         self.response.out.write(template.render(path, locals()))
 
-    def post(self):
-        self.get() 
+    post = get

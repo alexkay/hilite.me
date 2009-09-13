@@ -20,7 +20,7 @@
           margin:1em auto;
       }
       #container > div {
-          margin:1em;
+          margin:auto 1em;
       }
       #code {
           float:left;
@@ -49,21 +49,36 @@
       #divstyles {
           width:50%;
       }
+      #footer {
+          border-top:1px dotted #000;
+      }
+      #footer p {
+          text-align:center;
+          font-size:75%;
+      }
     </style>
   </head>
   <body>
     <form action="/" method="post">
       <div id="container">
         <div id="header">
+          <p>
+            <strong style="color:red">hilite.me</strong> converts your code snippets into HTML format easily embeddable into blog posts and websites.
+          </p>
+          <p>
+            Just copy the source code to the left pane, select the language and the color scheme, and click &quot;Highlight!&quot;. The HTML from the right pane can now be pasted to your blog, no external CSS or Javascript files are required.
+          </p>
         </div>
         <div id="main">
           <div id="code">
             <div id="code2">
+              <strong>Source code:</strong><br/>
               <textarea name="code">{{ code|escape }}</textarea>
             </div>
           </div>
           <div id="html">
             <div id="html2">
+              <strong>HTML:</strong><br/>
               <textarea name="html" readonly="readonly">{{ html|escape }}</textarea>
             </div>
           </div>
@@ -90,9 +105,15 @@
           </p>
         </div>
         <div id="preview">
-          {{ html }}
+          <p>
+            <strong>Preview:</strong><br/>
+            {{ html }}
+          </p>
         </div>
         <div id="footer">
+          <p>
+            Written by <a href="http://versia.com">Alexander Kojevnikov</a>. Powered by <a href="http://code.google.com/appengine/">Google App Engine</a> and <a href="http://pygments.org/">Pygments</a>.
+          </p>
         </div>
       </div>
     </form>
