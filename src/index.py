@@ -11,6 +11,8 @@ from pygments.lexers import get_all_lexers, get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 from pygments.styles import get_all_styles
 
+from tools import insert_line_numbers
+
 class IndexHandler(webapp.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__), 'templates/index.html')
@@ -39,12 +41,14 @@ class IndexHandler(webapp.RequestHandler):
             divstyles += 'border-width:.1em .1em .1em .8em;padding:.2em .6em;'
         defstyles = 'overflow:auto;width:auto;'
         formatter = HtmlFormatter(style=style,
-                                  linenos='inline' if linenos else False,
+                                  linenos=False,
                                   noclasses=True,
                                   cssclass='',
                                   cssstyles=defstyles + divstyles,
                                   prestyles='margin: 0')
         html = highlight(code, get_lexer_by_name(lexer), formatter)
+        if linenos:
+            html = insert_line_numbers(html)
         html = "<!-- HTML generated using hilite.me -->\n" + html
         next_year = formatdate(time.time() + 60*60*24*365)
         self.response.headers.add_header('Set-Cookie',

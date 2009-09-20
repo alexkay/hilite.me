@@ -103,7 +103,7 @@
               <option {% ifequal item style %}selected="selected" {% endifequal %}value="{{ item|escape }}">{{ item|escape }}</option>
               {% endfor %}
             </select>
-            <input name="linenos" id="linenos" type="checkbox" value="1" {% if linenos %}checked{% endif %} /><label for="linenos">Line numbers</label>
+            <input name="linenos" id="linenos" type="checkbox" value="1" {% if linenos %}checked="checked"{% endif %} /><label for="linenos">Line numbers</label>
             <br/>
             CSS:
             <input type="text" id="divstyles" name="divstyles" value="{{ divstyles|escape }}"/>
