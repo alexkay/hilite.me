@@ -36,10 +36,19 @@ class IndexHandler(webapp.RequestHandler):
                    unquote(self.request.cookies.get('linenos', ''))) or ''
         divstyles = self.request.get('divstyles',
                                      unquote(self.request.cookies.get('divstyles', '')))
-        if not divstyles:
-            divstyles = 'color:black;background:white;border:solid gray;'
-            divstyles += 'border-width:.1em .1em .1em .8em;padding:.2em .6em;'
         defstyles = 'overflow:auto;width:auto;'
+        common_styles = 'border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;'
+        bw_styles = 'color:black;background:white;' + common_styles
+        wb_styles = 'color:white;background:black;' + common_styles
+        if not divstyles: divstyles = bw_styles
+
+        if style in ('fruity', 'native'):
+            if divstyles == bw_styles:
+                divstyles = wb_styles
+        else:
+            if divstyles == wb_styles:
+                divstyles = bw_styles
+
         formatter = HtmlFormatter(style=style,
                                   linenos=False,
                                   noclasses=True,
