@@ -85,7 +85,7 @@
           <div id="html">
             <div id="html2">
               <strong>HTML:</strong><br/>
-              <textarea name="html" rows="10" cols="40" readonly="readonly">{{ html|escape }}</textarea>
+              <textarea id="html" name="html" rows="10" cols="40" readonly="readonly" onClick="javascript:this.form.html.focus();this.form.html.select();">{{ html|escape }}</textarea>
             </div>
           </div>
         </div>
