@@ -1,0 +1,13 @@
+# hilite.me API documentation
+
+POST to http://www.hilite.me/api with these parameters:
+
+* code: source code to format
+* lexer: [lexer](http://pygments.org/docs/lexers/) to use, default it 'python'
+* style: [style](http://pygments.org/docs/styles/) to use, default is 'colorful'
+* linenos: if not empty, the HTML will include line numbers
+* divstyles: CSS style to use in the wrapping <div> element, can be empty
+
+The POST will return the HTML code in UTF-8 encoding.
+
+Feel free to use the API as you see fit, but please let me know if you expect to have a lot of requests, I will need to bump the App Engine quotas.
