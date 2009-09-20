@@ -9,5 +9,10 @@ handlers:
   upload: static/favicon.ico
   mime_type: vnd.microsoft.icon
 
+- url: /robots.txt
+  static_files: static/robots.txt
+  upload: static/robots.txt
+  mime_type: text/plain
+
 - url: /.*
   script: main.py
