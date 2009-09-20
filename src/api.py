@@ -8,7 +8,7 @@ from tools import hilite_me, update_styles
 class ApiHandler(webapp.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__), 'templates/api.txt')
-        self.response.headers.add_header("Content-Type", "text/plain")
+        self.response.headers["Content-Type"] = "text/plain"
         self.response.out.write(template.render(path, {}))
 
     def post(self):
@@ -20,5 +20,5 @@ class ApiHandler(webapp.RequestHandler):
 
         html = hilite_me(code, lexer, style, linenos, divstyles)
 
-        self.response.headers.add_header("Content-Type", "text/plain")
+        self.response.headers["Content-Type"] = "text/plain"
         self.response.out.write(html)
