@@ -3,6 +3,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 from index import IndexHandler
+from api import ApiHandler
 
 debug = os.environ.get('SERVER_SOFTWARE', '').lower().startswith('devel');
 if debug:
@@ -10,6 +11,7 @@ if debug:
     logging.logMultiprocessing = 0
 
 application = webapp.WSGIApplication([('/', IndexHandler),
+                                      ('/api', ApiHandler),
                                      ],
                      debug=debug)
 

@@ -1,5 +1,40 @@
 import re
 
+from pygments import highlight
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters import HtmlFormatter
+
+def hilite_me(code, lexer, style, linenos, divstyles):
+    lexer = lexer or 'python'
+    style = style or 'colorful'
+    defstyles = 'overflow:auto;width:auto;'
+
+    formatter = HtmlFormatter(style=style,
+                              linenos=False,
+                              noclasses=True,
+                              cssclass='',
+                              cssstyles=defstyles + divstyles,
+                              prestyles='margin: 0')
+    html = highlight(code, get_lexer_by_name(lexer), formatter)
+    if linenos:
+        html = insert_line_numbers(html)
+    html = "<!-- HTML generated using hilite.me -->\n" + html
+    return html
+
+def update_styles(style, divstyles):
+    common_styles = 'border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;'
+    bw_styles = 'color:black;background:white;' + common_styles
+    wb_styles = 'color:white;background:black;' + common_styles
+    if not divstyles: divstyles = bw_styles
+
+    if style in ('fruity', 'native'):
+        if divstyles == bw_styles:
+            divstyles = wb_styles
+    else:
+        if divstyles == wb_styles:
+            divstyles = bw_styles
+    return divstyles
+
 def insert_line_numbers(html):
     match = re.search('(<pre[^>]*>)(.*)(</pre>)', html, re.DOTALL)
     if not match: return html

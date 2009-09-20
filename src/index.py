@@ -6,12 +6,10 @@ from urllib import quote, unquote
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 
-from pygments import highlight
-from pygments.lexers import get_all_lexers, get_lexer_by_name
-from pygments.formatters import HtmlFormatter
+from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
 
-from tools import insert_line_numbers
+from tools import hilite_me, update_styles
 
 class IndexHandler(webapp.RequestHandler):
     def get(self):
@@ -22,43 +20,20 @@ class IndexHandler(webapp.RequestHandler):
             code = "print 'hello world!'"
         lexer = (self.request.get('lexer') or
                  unquote(self.request.cookies.get('lexer', '')))
-        if not lexer:
-            lexer = 'python'
         lexers = [(l[1][0], l[0]) for l in get_all_lexers()]
         lexers = sorted(lexers, lambda a, b: cmp(a[1].lower(), b[1].lower()))
         style = (self.request.get('style') or
                  unquote(self.request.cookies.get('style', '')))
-        if not style:
-            style = 'colorful'
         styles = sorted(get_all_styles(), key=str.lower)
         linenos = (self.request.get('linenos') or
                    self.request.method == 'GET' and
                    unquote(self.request.cookies.get('linenos', ''))) or ''
         divstyles = self.request.get('divstyles',
                                      unquote(self.request.cookies.get('divstyles', '')))
-        defstyles = 'overflow:auto;width:auto;'
-        common_styles = 'border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;'
-        bw_styles = 'color:black;background:white;' + common_styles
-        wb_styles = 'color:white;background:black;' + common_styles
-        if not divstyles: divstyles = bw_styles
+        divstyles = update_styles(style, divstyles)
 
-        if style in ('fruity', 'native'):
-            if divstyles == bw_styles:
-                divstyles = wb_styles
-        else:
-            if divstyles == wb_styles:
-                divstyles = bw_styles
+        html = hilite_me(code, lexer, style, linenos, divstyles)
 
-        formatter = HtmlFormatter(style=style,
-                                  linenos=False,
-                                  noclasses=True,
-                                  cssclass='',
-                                  cssstyles=defstyles + divstyles,
-                                  prestyles='margin: 0')
-        html = highlight(code, get_lexer_by_name(lexer), formatter)
-        if linenos:
-            html = insert_line_numbers(html)
-        html = "<!-- HTML generated using hilite.me -->\n" + html
         next_year = formatdate(time.time() + 60*60*24*365)
         self.response.headers.add_header('Set-Cookie',
                                          'lexer=%s; expires=%s' %
