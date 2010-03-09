@@ -1,0 +1,15 @@
+Installing hilite.me
+====================
+
+If you want to install hilite.me as your own App Engine application you need to do the following:
+
+*   Download the latest [Pygments tarball][1] and copy the contents `pygments` directory into `./src/pygments`.
+*   Open `./update` and set `--email` to your email address.
+*   Open `./src/app.yaml` and change the application from `hilite-me` to your own.
+*   Open `./src/templates/index.html` and remove the Google Analytics tracking code at the bottom of the template, or replace with our own.
+
+After this you can deploy the app using `./update`
+
+Please note that under AGPLv3 license deploying hilite.me requires that you share its source code with all modifications you have made. See COPYING for details.
+
+[1]: http://pygments.org/download/

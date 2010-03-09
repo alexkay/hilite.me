@@ -1,0 +1,7 @@
+hilite.me is a small webapp that converts your code snippets into pretty-printed HTML format, easily embeddable into blog posts and websites.
+
+hilite.me is licensed under GNU Affero General Public License v3, see COPYING for details.
+
+hilite.me runs on Google App Engine and uses the Pygments project, see INSTALL for details.
+
+Please contact Alexander Kojevnikov <alexander@kojevnikov.com> with questions, comments and bug reports.
