@@ -1,3 +1,4 @@
 *.pyc
 *.swp
 .ropeproject
+src/pygments
