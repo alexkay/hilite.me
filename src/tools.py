@@ -18,7 +18,7 @@ def hilite_me(code, lexer, style, linenos, divstyles):
     html = highlight(code, get_lexer_by_name(lexer), formatter)
     if linenos:
         html = insert_line_numbers(html)
-    html = "<!-- HTML generated using hilite.me -->\n" + html
+    html = "<!-- HTML generated using hilite.me -->" + html
     return html
 
 def update_styles(style, divstyles):
