@@ -24,6 +24,9 @@ from tools import hilite_me, update_styles
 
 class ApiHandler(webapp.RequestHandler):
     def get(self):
+        if self.request.get('code'):
+            return self.post()
+
         path = os.path.join(os.path.dirname(__file__), 'templates/api.txt')
         self.response.headers["Content-Type"] = "text/plain"
         self.response.out.write(template.render(path, {}))
