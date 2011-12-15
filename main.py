@@ -17,7 +17,7 @@
 # along with hilite.me.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
-from urllib import quote_plus, unquote_plus
+from urllib import quote, unquote
 
 from flask import Flask, make_response, render_template, request
 
@@ -34,29 +34,29 @@ def index():
         code = request.form.get('code', "print 'hello world!'")
         lexer = (
             request.form.get('lexer', '') or
-            unquote_plus(request.cookies.get('lexer', '')))
+            unquote(request.cookies.get('lexer', 'python')))
         lexers = [(l[1][0], l[0]) for l in get_all_lexers()]
         lexers = sorted(lexers, lambda a, b: cmp(a[1].lower(), b[1].lower()))
         style = (
             request.form.get('style', '') or
-            unquote_plus(request.cookies.get('style', '')))
+            unquote(request.cookies.get('style', 'colorful')))
         styles = sorted(get_all_styles(), key=str.lower)
         linenos = (
             request.form.get('linenos', '') or
             request.method == 'GET' and
-            unquote_plus(request.cookies.get('linenos', ''))) or ''
+            unquote(request.cookies.get('linenos', ''))) or ''
         divstyles = request.form.get(
-            'divstyles', unquote_plus(request.cookies.get('divstyles', '')))
+            'divstyles', unquote(request.cookies.get('divstyles', '')))
         divstyles = update_styles(style, divstyles)
 
         html = hilite_me(code, lexer, style, linenos, divstyles)
         response = make_response(render_template('index.html', **locals()))
 
         next_year = datetime.datetime.now() + datetime.timedelta(days=365)
-        response.set_cookie('lexer', quote_plus(lexer), expires=next_year)
-        response.set_cookie('style', quote_plus(style), expires=next_year)
-        response.set_cookie('linenos', quote_plus(linenos), expires=next_year)
-        response.set_cookie('divstyles', quote_plus(divstyles), expires=next_year)
+        response.set_cookie('lexer', quote(lexer), expires=next_year)
+        response.set_cookie('style', quote(style), expires=next_year)
+        response.set_cookie('linenos', quote(linenos), expires=next_year)
+        response.set_cookie('divstyles', quote(divstyles), expires=next_year)
 
         return response
 
