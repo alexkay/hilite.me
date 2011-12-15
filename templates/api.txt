@@ -9,5 +9,3 @@ GET or POST to http://www.hilite.me/api with these parameters:
 * divstyles: CSS style to use in the wrapping <div> element, can be empty
 
 The request will return the HTML code in UTF-8 encoding.
-
-Feel free to use the API as you see fit, but please let me know if you expect to have a lot of requests, I will need to bump the App Engine quotas.
