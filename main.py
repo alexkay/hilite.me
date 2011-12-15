@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with hilite.me.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
+
 from flask import Flask, make_response, render_template, request
 
 from pygments.lexers import get_all_lexers
@@ -49,10 +51,11 @@ def index_handler():
         html = hilite_me(code, lexer, style, linenos, divstyles)
         response = make_response(render_template('index.html', **locals()))
 
-        response.set_cookie('lexer', lexer)
-        response.set_cookie('style', style)
-        response.set_cookie('linenos', linenos)
-        response.set_cookie('divstyles', divstyles)
+        next_year = datetime.datetime.now() + datetime.timedelta(days=365)
+        response.set_cookie('lexer', lexer, expires=next_year)
+        response.set_cookie('style', style, expires=next_year)
+        response.set_cookie('linenos', linenos, expires=next_year)
+        response.set_cookie('divstyles', divstyles, expires=next_year)
 
         return response
 
