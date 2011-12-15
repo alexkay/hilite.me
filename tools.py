@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright © 2009-2010 Alexander Kojevnikov <alexander@kojevnikov.com>
+# Copyright © 2009-2011 Alexander Kojevnikov <alexander@kojevnikov.com>
 #
 # hilite.me is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
