@@ -1,3 +1,0 @@
-#!/bin/sh
-
-/opt/google_appengine/appcfg.py --email=alexander@kojevnikov.com update src
