@@ -30,7 +30,7 @@ from tools import *
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
-def index_handler():
+def index():
         code = request.form.get('code', "print 'hello world!'")
         lexer = (
             request.form.get('lexer', '') or
@@ -59,6 +59,24 @@ def index_handler():
         response.set_cookie('divstyles', quote_plus(divstyles), expires=next_year)
 
         return response
+
+@app.route("/api", methods=['GET', 'POST'])
+def api():
+    code = request.values.get('code', '')
+    if not code:
+        response = make_response(render_template('api.txt'))
+        response.headers["Content-Type"] = "text/plain"
+        return response
+
+    lexer = request.values.get('lexer', '')
+    style = request.values.get('style', '')
+    linenos = request.values.get('linenos', '')
+    divstyles = update_styles(style, request.form.get('divstyles', ''))
+
+    html = hilite_me(code, lexer, style, linenos, divstyles)
+    response = make_response(html)
+    response.headers["Content-Type"] = "text/plain"
+    return response
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
