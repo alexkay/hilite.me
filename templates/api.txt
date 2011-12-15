@@ -1,6 +1,6 @@
 # hilite.me API documentation
 
-GET or POST to http://www.hilite.me/api with these parameters:
+GET or POST to http://hilite.me/api with these parameters:
 
 * code: source code to format
 * lexer: [lexer](http://pygments.org/docs/lexers/) to use, default it 'python'
