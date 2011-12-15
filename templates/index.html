@@ -79,13 +79,13 @@
           <div id="code">
             <div id="code2">
               <strong>Source code:</strong><br/>
-              <textarea name="code" rows="10" cols="40">{{ code|escape }}</textarea>
+              <textarea name="code" rows="10" cols="40">{{ code }}</textarea>
             </div>
           </div>
           <div id="html">
             <div id="html2">
               <strong>HTML:</strong><br/>
-              <textarea id="html" name="html" rows="10" cols="40" readonly="readonly" onClick="javascript:this.form.html.focus();this.form.html.select();">{{ html|escape }}</textarea>
+              <textarea id="html" name="html" rows="10" cols="40" readonly="readonly" onClick="javascript:this.form.html.focus();this.form.html.select();">{{ html }}</textarea>
             </div>
           </div>
         </div>
@@ -94,13 +94,13 @@
             Language:
             <select name="lexer">
               {% for item in lexers %}
-              <option {% ifequal item.0 lexer %}selected="selected" {% endifequal %}value="{{ item.0|escape }}">{{ item.1|escape }}</option>
+              <option {% if item.0 == lexer %}selected="selected" {% endif %}value="{{ item.0 }}">{{ item.1 }}</option>
               {% endfor %}
             </select>
             Style:
             <select name="style">
               {% for item in styles %}
-              <option {% ifequal item style %}selected="selected" {% endifequal %}value="{{ item|escape }}">{{ item|escape }}</option>
+              <option {% if item == style %}selected="selected" {% endif %}value="{{ item }}">{{ item }}</option>
               {% endfor %}
             </select>
             <input name="linenos" id="linenos" type="checkbox" value="1" {% if linenos %}checked="checked"{% endif %} /><label for="linenos">Line numbers</label>
@@ -114,11 +114,13 @@
           <p>
             <strong>Preview:</strong>
           </p>
+          {% autoescape false %}
           {{ html }}
+          {% endautoescape %}
         </div>
         <div id="footer">
           <p>
-            <a href="/api">API</a> &bull; <a href="https://github.com/alexkay/hilite.me">Code</a> &bull; Made by <a href="http://versia.com">Alexander Kojevnikov</a> &bull; Powered by <a href="http://code.google.com/appengine/">Google App Engine</a> and <a href="http://pygments.org/">Pygments</a>
+            <a href="/api">API</a> &bull; <a href="https://github.com/alexkay/hilite.me">Code</a> &bull; Made by <a href="http://kojevnikov.com">Alexander Kojevnikov</a> &bull; Powered by <a href="http://flask.pocoo.org/">Flask</a> and <a href="http://pygments.org/">Pygments</a>
           </p>
         </div>
       </div>

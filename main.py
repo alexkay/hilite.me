@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 # -*- coding: utf-8 -*-
 #
 # Copyright © 2009-2011 Alexander Kojevnikov <alexander@kojevnikov.com>
@@ -17,13 +16,45 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with hilite.me.  If not, see <http://www.gnu.org/licenses/>.
 
-from flask import Flask
+from flask import Flask, make_response, render_template, request
+
+from pygments.lexers import get_all_lexers
+from pygments.styles import get_all_styles
+
+from tools import *
+
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return "Hello World!"
+@app.route("/", methods=['GET', 'POST'])
+def index_handler():
+        code = request.form.get('code', "print 'hello world!'")
+        lexer = (
+            request.form.get('lexer', '') or
+            request.cookies.get('lexer', ''))
+        lexers = [(l[1][0], l[0]) for l in get_all_lexers()]
+        lexers = sorted(lexers, lambda a, b: cmp(a[1].lower(), b[1].lower()))
+        style = (
+            request.form.get('style', '') or
+            request.cookies.get('style', ''))
+        styles = sorted(get_all_styles(), key=str.lower)
+        linenos = (
+            request.form.get('linenos', '') or
+            request.method == 'GET' and
+            request.cookies.get('linenos', '')) or ''
+        divstyles = request.form.get(
+            'divstyles', request.cookies.get('divstyles', ''))
+        divstyles = update_styles(style, divstyles)
+
+        html = hilite_me(code, lexer, style, linenos, divstyles)
+        response = make_response(render_template('index.html', **locals()))
+
+        response.set_cookie('lexer', lexer)
+        response.set_cookie('style', style)
+        response.set_cookie('linenos', linenos)
+        response.set_cookie('divstyles', divstyles)
+
+        return response
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)

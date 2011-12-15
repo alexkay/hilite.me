@@ -17,9 +17,6 @@
 
 import os
 
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
-
 from tools import hilite_me, update_styles
 
 class ApiHandler(webapp.RequestHandler):
