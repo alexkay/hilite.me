@@ -49,7 +49,7 @@ def index():
             'divstyles', unquote(request.cookies.get('divstyles', '')))
         divstyles = update_styles(style, divstyles)
 
-        html = hilite_me(code, lexer, style, linenos, divstyles)
+        html = hilite_me(code, lexer, {}, style, linenos, divstyles)
         response = make_response(render_template('index.html', **locals()))
 
         next_year = datetime.datetime.now() + datetime.timedelta(days=365)
@@ -69,11 +69,23 @@ def api():
         return response
 
     lexer = request.values.get('lexer', '')
+    options = request.values.get('options', '')
+
+    def convert(item):
+        key, value = item
+        if value == 'False':
+            return key, False
+        elif value == 'True':
+            return key, True
+        else:
+            return key, value
+    options = dict(convert(option.split('=')) for option in options.split(',') if option)
+
     style = request.values.get('style', '')
     linenos = request.values.get('linenos', '')
     divstyles = update_styles(style, request.form.get('divstyles', ''))
 
-    html = hilite_me(code, lexer, style, linenos, divstyles)
+    html = hilite_me(code, lexer, options, style, linenos, divstyles)
     response = make_response(html)
     response.headers["Content-Type"] = "text/plain"
     return response

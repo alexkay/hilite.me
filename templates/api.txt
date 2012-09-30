@@ -4,6 +4,7 @@ GET or POST to http://hilite.me/api with these parameters:
 
 * code: source code to format
 * lexer: [lexer](http://pygments.org/docs/lexers/) to use, default it 'python'
+* options: optional comma-separated list of lexer options
 * style: [style](http://pygments.org/docs/styles/) to use, default is 'colorful'
 * linenos: if not empty, the HTML will include line numbers
 * divstyles: CSS style to use in the wrapping <div> element, can be empty

@@ -21,7 +21,7 @@ from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 
-def hilite_me(code, lexer, style, linenos, divstyles):
+def hilite_me(code, lexer, options, style, linenos, divstyles):
     lexer = lexer or 'python'
     style = style or 'colorful'
     defstyles = 'overflow:auto;width:auto;'
@@ -32,7 +32,7 @@ def hilite_me(code, lexer, style, linenos, divstyles):
                               cssclass='',
                               cssstyles=defstyles + divstyles,
                               prestyles='margin: 0')
-    html = highlight(code, get_lexer_by_name(lexer), formatter)
+    html = highlight(code, get_lexer_by_name(lexer, **options), formatter)
     if linenos:
         html = insert_line_numbers(html)
     html = "<!-- HTML generated using hilite.me -->" + html
