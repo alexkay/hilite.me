@@ -38,19 +38,8 @@ def hilite_me(code, lexer, options, style, linenos, divstyles):
     html = "<!-- HTML generated using hilite.me -->" + html
     return html
 
-def update_styles(style, divstyles):
-    common_styles = 'border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;'
-    bw_styles = 'color:black;background:white;' + common_styles
-    wb_styles = 'color:white;background:black;' + common_styles
-    if not divstyles: divstyles = bw_styles
-
-    if style in ('fruity', 'native'):
-        if divstyles == bw_styles:
-            divstyles = wb_styles
-    else:
-        if divstyles == wb_styles:
-            divstyles = bw_styles
-    return divstyles
+def get_default_style():
+    return 'border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;'
 
 def insert_line_numbers(html):
     match = re.search('(<pre[^>]*>)(.*)(</pre>)', html, re.DOTALL)

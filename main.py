@@ -47,7 +47,7 @@ def index():
             unquote(request.cookies.get('linenos', ''))) or ''
         divstyles = request.form.get(
             'divstyles', unquote(request.cookies.get('divstyles', '')))
-        divstyles = update_styles(style, divstyles)
+        divstyles = divstyles or get_default_style()
 
         html = hilite_me(code, lexer, {}, style, linenos, divstyles)
         response = make_response(render_template('index.html', **locals()))
@@ -83,7 +83,7 @@ def api():
 
     style = request.values.get('style', '')
     linenos = request.values.get('linenos', '')
-    divstyles = update_styles(style, request.form.get('divstyles', ''))
+    divstyles = request.form.get('divstyles', get_default_style())
 
     html = hilite_me(code, lexer, options, style, linenos, divstyles)
     response = make_response(html)
