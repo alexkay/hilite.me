@@ -7,6 +7,7 @@ cd $DIR
 exec setuidgid www /usr/local/bin/uwsgi \
     --socket=/tmp/hilite.me.sock \
     --pythonpath="$DIR" \
+    --home=env \
     --master \
     --processes=3 \
     --harakiri=30 \
