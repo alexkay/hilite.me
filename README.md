@@ -16,10 +16,10 @@ Edit your main `nginx.conf`:
 
     http {
         ...
-        include /path/to/hilite.me/nginx.conf;
+        include /path/to/hilite.me/nginx-dev.conf;
     }
 
-Update the project location in `hilite.me/nginx.conf` and restart nginx.
+Update the project location in `hilite.me/nginx-dev.conf` and restart nginx.
 
 Add this line to your `/etc/hosts`:
 

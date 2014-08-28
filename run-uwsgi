@@ -9,7 +9,7 @@ exec setuidgid www /usr/local/bin/uwsgi \
     --pythonpath="$DIR" \
     --home=env \
     --master \
-    --processes=3 \
+    --processes=5 \
     --harakiri=30 \
     --max-requests=1000 \
     --module="main:app"
