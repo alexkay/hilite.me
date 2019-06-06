@@ -55,3 +55,6 @@ def insert_line_numbers(html):
     lines = '\n'.join(format % i for i in numbers)
     html = html.replace(pre_open, '<table><tr><td>' + pre_open + lines + '</pre></td><td>' + pre_open)
     return html
+
+def cmp(a, b):
+    return (a > b) - (a < b) 
