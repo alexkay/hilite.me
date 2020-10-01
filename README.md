@@ -1,4 +1,6 @@
 # hilite.me
+// This is a used to setup development you need install nginx and vurtualenv , then run
+
 
 [hilite.me](http://hilite.me/) is a small webapp that converts your code
 snippets into pretty-printed HTML format, easily embeddable into blog posts and
