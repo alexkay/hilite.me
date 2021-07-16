@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  nginx:
+    image: nginx:1.21.1
+    container_name: nginx
+    depends_on:
+      - flask
+    volumes:
+      - ./nginx-docker.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - my-network
+    ports:
+      - 80:80
+  flask:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: hilite
+    networks:
+      - my-network
+
+networks:
+  my-network:
