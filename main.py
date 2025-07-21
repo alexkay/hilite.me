@@ -33,11 +33,11 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-        code = request.form.get('code', "print 'hello world!'")
+        code = request.form.get('code', "print('hello world!')")
         lexer = (
             request.form.get('lexer', '') or
             unquote(request.cookies.get('lexer', 'python')))
-        lexers = [(l[1][0], l[0]) for l in get_all_lexers()]
+        lexers = [(l[1][0], l[0]) for l in get_all_lexers() if l[1]]
         lexers = sorted(lexers, key=cmp_to_key(lambda a, b: cmp(a[1].lower(), b[1].lower())))
         style = (
             request.form.get('style', '') or

@@ -8,7 +8,7 @@ websites.
 
 To set up development environment you need to install nginx and virtualenv, then run:
 
-    % virtualenv env
+    % virtualenv -p python3 env
     % source env/bin/activate
     % pip install -r requirements.txt
 
@@ -23,7 +23,7 @@ Update the project location in `hilite.me/nginx-dev.conf` and restart nginx.
 
 Add this line to your `/etc/hosts`:
 
-    127.0.0.1  hilite.dev
+    127.0.0.1  hilite.local
 
-Type `make run` and go to <http://hilite.dev/>. If static files don't load make
+Type `make run` and go to <http://hilite.local/>. If static files don't load make
 sure nginx has rx permissions for the `hilite.me/static` directory.
