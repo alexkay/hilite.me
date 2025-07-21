@@ -17,7 +17,7 @@
 # along with hilite.me.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
-from urllib import quote, unquote
+from urllib.parse import quote, unquote
 
 from flask import Flask, make_response, render_template, request
 
@@ -25,6 +25,8 @@ from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
 
 from tools import *
+
+from functools import cmp_to_key
 
 
 app = Flask(__name__)
@@ -36,7 +38,7 @@ def index():
             request.form.get('lexer', '') or
             unquote(request.cookies.get('lexer', 'python')))
         lexers = [(l[1][0], l[0]) for l in get_all_lexers()]
-        lexers = sorted(lexers, lambda a, b: cmp(a[1].lower(), b[1].lower()))
+        lexers = sorted(lexers, key=cmp_to_key(lambda a, b: cmp(a[1].lower(), b[1].lower())))
         style = (
             request.form.get('style', '') or
             unquote(request.cookies.get('style', 'colorful')))
@@ -91,4 +93,4 @@ def api():
     return response
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='127.0.0.1')
