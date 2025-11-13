@@ -84,6 +84,13 @@ mkdir -p /var/www/html/.well-known/acme-challenge
 certbot certonly --webroot -w /var/www/html -d hilite.me -d www.hilite.me
 ```
 
+### Configure auto-reload hook for certificate renewals
+```bash
+# Create hook to reload nginx after certificate renewals
+printf '#!/bin/bash\n# Reload nginx to pick up renewed certificates\nsystemctl reload nginx\n' > /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh
+chmod +x /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh
+```
+
 ### Reload nginx with SSL
 ```bash
 systemctl reload nginx
